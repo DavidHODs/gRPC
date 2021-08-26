@@ -1,0 +1,33 @@
+syntax = "proto3";
+
+package calculator;
+option go_package = "protocol/calculator/calculatorpb";
+
+message Addition {
+    int32 first_integer = 1;
+    int32 second_integer = 2;
+}
+
+message AdditionRequest {
+    Addition addition = 1;
+}
+
+message AdditionResponse {
+    int32 result = 1;
+}
+
+message AddManyTimesRequest {
+    Addition addition = 1;
+}
+
+message AddManyTimesResponse {
+    int32 result = 1;
+}
+
+service AdditionService {
+    // Unary
+    rpc Add (AdditionRequest) returns (AdditionResponse) {};
+
+    // Server Streaming
+    rpc AddManyTimes (AddManyTimesRequest) returns (stream AddManyTimesResponse) {};
+}
